@@ -1,4 +1,4 @@
-# nrk51-dk-gcc
+# nrf51-dk-gcc
 A example of nRF51-DK application using gcc on Linux
 
 Strongly inspired by :
