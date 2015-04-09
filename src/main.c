@@ -3,11 +3,13 @@
 
 
 int main(void){
-    nrf_gpio_range_cfg_output(18,19);
+    nrf_gpio_range_cfg_output(21,22);
     while(1){
-        nrf_gpio_port_write(2,8);
+        nrf_gpio_pin_write(21,0);
+        nrf_gpio_pin_write(22,1);
         nrf_delay_ms(80);
-        nrf_gpio_port_write(2,4);
+        nrf_gpio_pin_write(21,1);
+        nrf_gpio_pin_write(22,0);
         nrf_delay_ms(80);
     }
 

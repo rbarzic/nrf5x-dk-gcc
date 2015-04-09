@@ -45,3 +45,5 @@ SDK_DRIVERS_NRF_HAL=yes
 include misc/nRF51_Devices.mk
 include misc/SDK_Makefile.mk
 include misc/Makefile
+include misc/nrftools_jlink.mk
+include misc/check.mk

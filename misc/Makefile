@@ -52,7 +52,8 @@ LINKER_SCRIPT_TOP_DIR ?= $(SDK_PATH)/components/toolchain/gcc
 LINKER_SCRIPT ?= $(LINKER_SCRIPT_TOP_DIR)/gcc_nrf51_$(SOFTDEVICE)_$(LINKER_FILE_SUFFIX).ld
 LDFLAGS += $(CPUFLAGS)  -T $(LINKER_SCRIPT) -L $(LINKER_SCRIPT_TOP_DIR)
 
-
+# from 
+FLASH_START_ADDRESS = $(shell $(OBJDUMP) -h $(ELF) -j .text | grep .text | awk '{print $$4}')
 test:
 	@echo "Source : " $(C_SOURCE_FILES)
 	@echo "Source AS: " $(SRCS_AS)
@@ -68,6 +69,9 @@ $(HEX): $(OBJS) $(OBJS_AS)
 	$(OBJCOPY) -Obinary $(ELF) $(BIN)
 	$(SIZE) $(ELF)
 
+
+print_flash_address:
+	@echo "Flash address " $(FLASH_START_ADDRESS)
 
 %.o: %.c
 
