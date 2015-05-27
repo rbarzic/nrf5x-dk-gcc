@@ -81,6 +81,11 @@ print_flash_address:
 	$(CC) $(LDFLAGS) $(CFLAGS) $< -o $@
 
 
+
+check-syntax:
+	$(CC) -c $(CFLAGS) -fsyntax-only $(CHK_SOURCES)
+
+
 # http://developer.nordicsemi.com/nRF51_SDK/nRF51_SDK_7.2.0_cf547b5.zip
 
 get_sdk:
@@ -98,5 +103,7 @@ install_sdk:
 
 
 
+echo-cflags:
+	@echo \"$(CFLAGS)\"
 
 .PHONY: all clean
