@@ -3,3 +3,5 @@
 /test.bin
 /test.elf
 /test.hex
+/main_flymake.d
+/ld.txt
