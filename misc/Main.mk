@@ -21,7 +21,8 @@ C_SOURCE_FILES += $(SDK_PATH)/components/toolchain/system_nrf51.c
 
 INC_PATHS += -I$(SDK_PATH)/components/toolchain/gcc
 INC_PATHS += -I$(SDK_PATH)/components/toolchain
-INC_PATHS += -I$(SDK_PATH)/components/drivers_nrf/hal
+INC_PATHS += -I$(SDK_PATH)/components/drivers_nrf/hal # SDK 7.x.x
+INC_PATHS += -I$(SDK_PATH)/components/device         # SDK 8.x.x
 INC_PATHS += -I$(SDK_PATH)/bsp
 
 
@@ -40,16 +41,29 @@ HEX = $(PROJECT_NAME).hex
 ELF = $(PROJECT_NAME).elf
 BIN = $(PROJECT_NAME).bin
 
-
+ifeq ($(SDK_TYPE),7.x.x)
 ifeq  ($(USE_SOFT_DEVICE),no)
 SOFTDEVICE = blank
 else
 SOFTDEVICE = $(USE_SOFT_DEVICE)
 endif
+LINKER_SCRIPT ?= $(LINKER_SCRIPT_TOP_DIR)/gcc_nrf51_$(SOFTDEVICE)_$(LINKER_FILE_SUFFIX).ld
+endif
+
+ifeq ($(SDK_TYPE),8.x.x)
+ifeq  ($(USE_SOFT_DEVICE),no)
+SOFTDEVICE = 
+LINKER_SCRIPT ?= $(LINKER_SCRIPT_TOP_DIR)/nrf51_$(LINKER_FILE_SUFFIX).ld
+else
+SOFTDEVICE = $(USE_SOFT_DEVICE)
+LINKER_SCRIPT ?= $(LINKER_SCRIPT_TOP_DIR)/nrf51_$(LINKER_FILE_SUFFIX).ld  # FIXME - filename to be updated
+endif
+
+endif
 
 
 LINKER_SCRIPT_TOP_DIR ?= $(SDK_PATH)/components/toolchain/gcc
-LINKER_SCRIPT ?= $(LINKER_SCRIPT_TOP_DIR)/gcc_nrf51_$(SOFTDEVICE)_$(LINKER_FILE_SUFFIX).ld
+
 LDFLAGS += $(CPUFLAGS)  -T $(LINKER_SCRIPT) -L $(LINKER_SCRIPT_TOP_DIR)
 
 # from 
@@ -100,6 +114,9 @@ install_sdk:
 #  components/libraries/
 #
 # ./get_libraries.py --dir=../../../nordic/nRF51_SDK_7.2.0_cf547b5  --pattern='*.[c|h|s]' > SDK_Makefile.mk
+
+get_library:
+	./misc/get_libraries.py --dir=$(SDK_INSTALL_DIR)/$(SDK_VERSION)  --pattern='*.[c|h|s]' > ./misc/SDK_Makefile.mk
 
 
 

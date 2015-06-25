@@ -1,2 +1,5 @@
 /src/main.d
 /src/main.o
+/test.bin
+/test.elf
+/test.hex

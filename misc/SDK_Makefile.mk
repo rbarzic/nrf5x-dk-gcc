@@ -1,11 +1,11 @@
 # Automatically generated file
 ifeq ($(SDK_SERIALIZATION_CONNECTIVITY),yes)
 C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/ser_conn_dtm_cmd_decoder.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/ser_conn_handlers.c
 C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/ser_conn_cmd_decoder.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/ser_conn_error_handling.c
 C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/ser_conn_event_encoder.c
 C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/ser_conn_pkt_decoder.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/ser_conn_error_handling.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/ser_conn_handlers.c
 INC_PATHS += -I $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity
 endif
 
@@ -68,8 +68,8 @@ endif
 
 ifeq ($(SDK_LIBRARIES_TIMER),yes)
 C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/libraries/timer/app_timer_ble_gzll.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/libraries/timer/app_timer_rtx.c
 C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/libraries/timer/app_timer_freertos.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/libraries/timer/app_timer_rtx.c
 C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/libraries/timer/app_timer.c
 INC_PATHS += -I $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/libraries/timer
 endif
@@ -100,21 +100,20 @@ C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/ble/ble_db_discov
 INC_PATHS += -I $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/ble/ble_db_discovery
 endif
 
-ifeq ($(SDK_S110_MIDDLEWARE),yes)
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s110/middleware/conn_mw_ble_gap.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s110/middleware/conn_mw_ble_gatts.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s110/middleware/conn_mw_ble_l2cap.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s110/middleware/conn_mw_ble.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s110/middleware/conn_mw_nrf_soc.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s110/middleware/conn_mw_ble_gattc.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s110/middleware/conn_mw_items.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s110/middleware/app_mw_ble_gatts.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s110/middleware/app_mw_ble_gattc.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s110/middleware/app_mw_ble.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s110/middleware/app_mw_ble_l2cap.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s110/middleware/app_mw_nrf_soc.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s110/middleware/app_mw_ble_gap.c
-INC_PATHS += -I $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s110/middleware
+ifeq ($(SDK_TRANSPORT_SER_PHY),yes)
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/common/transport/ser_phy/ser_phy_nrf51_spi_master.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/common/transport/ser_phy/ser_phy_nrf51_spi_5W_master.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/common/transport/ser_phy/ser_phy_hci.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/common/transport/ser_phy/ser_phy_nrf51_spi_5W_slave.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/common/transport/ser_phy/ser_phy_nrf51_spi_slave.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/common/transport/ser_phy/ser_phy_nohci.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/common/transport/ser_phy/ser_phy_nrf51_uart_stm_conn.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/common/transport/ser_phy/ser_phy_nrf51_uart.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/common/transport/ser_phy/spi_5W_master.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/common/transport/ser_phy/ser_phy_hci_slip.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/common/transport/ser_phy/ser_phy_nrf51_uart_stm_app.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/common/transport/ser_phy/ser_phy.c
+INC_PATHS += -I $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/common/transport/ser_phy
 endif
 
 ifeq ($(SDK_BLE_SERVICES_BLE_BAS_C),yes)
@@ -128,19 +127,19 @@ INC_PATHS += -I $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/drivers_nrf/sdio
 endif
 
 ifeq ($(SDK_S120_MIDDLEWARE),yes)
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s120/middleware/app_mw_ble.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s120/middleware/app_mw_ble_gattc.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s120/middleware/app_mw_ble_l2cap.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s120/middleware/app_mw_ble_gap.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s120/middleware/app_mw_ble_gatts.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s120/middleware/app_mw_nrf_soc.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s120/middleware/conn_mw_nrf_soc.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s120/middleware/conn_mw_items.c
 C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s120/middleware/conn_mw_ble_gap.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s120/middleware/conn_mw_ble_gatts.c
 C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s120/middleware/conn_mw_ble_l2cap.c
 C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s120/middleware/conn_mw_ble.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s120/middleware/conn_mw_nrf_soc.c
 C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s120/middleware/conn_mw_ble_gattc.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s120/middleware/conn_mw_items.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s120/middleware/app_mw_ble_gatts.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s120/middleware/app_mw_ble_gattc.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s120/middleware/app_mw_ble.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s120/middleware/app_mw_ble_l2cap.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s120/middleware/app_mw_nrf_soc.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s120/middleware/app_mw_ble_gap.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s120/middleware/conn_mw_ble_gatts.c
 INC_PATHS += -I $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s120/middleware
 endif
 
@@ -150,8 +149,8 @@ INC_PATHS += -I $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/ble/ble_services/bl
 endif
 
 ifeq ($(SDK_SERIALIZATION_COMMON),yes)
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/common/cond_field_serialization.c
 C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/common/ble_serialization.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/common/cond_field_serialization.c
 INC_PATHS += -I $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/common
 endif
 
@@ -176,15 +175,15 @@ INC_PATHS += -I $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/drivers_ext/nrf6350
 endif
 
 ifeq ($(SDK_APPLICATION_HAL),yes)
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/hal/ser_app_hal_nrf51.c
 C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/hal/ser_app_power_system_off.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/hal/ser_app_hal_nrf51.c
 INC_PATHS += -I $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/hal
 SRCS_AS += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/hal/arm_startup_nrf51.s
 endif
 
 ifeq ($(SDK_BLE_SERVICES_BLE_CGM),yes)
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/ble/ble_services/ble_cgm/ble_cgm.c
 C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/ble/ble_services/ble_cgm/ble_cgm_db.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/ble/ble_services/ble_cgm/ble_cgm.c
 INC_PATHS += -I $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/ble/ble_services/ble_cgm
 endif
 
@@ -194,200 +193,201 @@ INC_PATHS += -I $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/ble/ble_error_log
 endif
 
 ifeq ($(SDK_STRUCT_SER_S120),yes)
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/common/struct_ser/s120/ble_gatts_struct_serialization.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/common/struct_ser/s120/ble_gap_struct_serialization.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/common/struct_ser/s120/ble_gattc_struct_serialization.c
 C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/common/struct_ser/s120/ble_struct_serialization.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/common/struct_ser/s120/ble_gap_struct_serialization.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/common/struct_ser/s120/ble_gatts_struct_serialization.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/common/struct_ser/s120/ble_gattc_struct_serialization.c
 INC_PATHS += -I $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/common/struct_ser/s120
 endif
 
-ifeq ($(SDK_TRANSPORT_SER_PHY),yes)
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/common/transport/ser_phy/ser_phy_nohci.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/common/transport/ser_phy/ser_phy_nrf51_uart_stm_conn.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/common/transport/ser_phy/ser_phy_nrf51_spi_5W_master.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/common/transport/ser_phy/ser_phy.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/common/transport/ser_phy/ser_phy_nrf51_spi_slave.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/common/transport/ser_phy/ser_phy_nrf51_uart.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/common/transport/ser_phy/spi_5W_master.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/common/transport/ser_phy/ser_phy_nrf51_spi_5W_slave.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/common/transport/ser_phy/ser_phy_hci_slip.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/common/transport/ser_phy/ser_phy_nrf51_spi_master.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/common/transport/ser_phy/ser_phy_nrf51_uart_stm_app.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/common/transport/ser_phy/ser_phy_hci.c
-INC_PATHS += -I $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/common/transport/ser_phy
+ifeq ($(SDK_S110_MIDDLEWARE),yes)
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s110/middleware/app_mw_ble.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s110/middleware/app_mw_ble_gattc.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s110/middleware/app_mw_ble_l2cap.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s110/middleware/app_mw_ble_gap.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s110/middleware/app_mw_ble_gatts.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s110/middleware/app_mw_nrf_soc.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s110/middleware/conn_mw_nrf_soc.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s110/middleware/conn_mw_items.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s110/middleware/conn_mw_ble_gap.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s110/middleware/conn_mw_ble_l2cap.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s110/middleware/conn_mw_ble.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s110/middleware/conn_mw_ble_gattc.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s110/middleware/conn_mw_ble_gatts.c
+INC_PATHS += -I $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s110/middleware
 endif
 
 ifeq ($(SDK_S110_SERIALIZERS),yes)
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s110/serializers/ble_gatts_characteristic_add.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s110/serializers/ble_gap_evt_conn_param_update.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s110/serializers/ble_gattc_evt_char_val_by_uuid_read_rsp.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s110/serializers/ble_gatts_value_get.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s110/serializers/ble_gattc_primary_services_discover.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s110/serializers/ble_gap_disconnect.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s110/serializers/ble_gattc_evt_desc_disc_rsp.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s110/serializers/ble_gap_tx_power_set.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s110/serializers/ble_opt_id_pre_decoder.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s110/serializers/ble_gatts_service_changed.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s110/serializers/ble_gap_auth_key_reply.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s110/serializers/ble_gattc_read.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s110/serializers/ble_gap_evt_auth_status.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s110/serializers/ble_l2cap_evt_rx.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s110/serializers/ble_gap_rssi_stop.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s110/serializers/ble_l2cap_cid_register.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s110/serializers/ble_gap_authenticate.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s110/serializers/ble_l2cap_tx.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s110/serializers/ble_gap_device_name_set.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s110/serializers/ble_gap_appearance_get.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s110/serializers/ble_gap_sec_info_reply.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s110/serializers/ble_gattc_evt_write_rsp.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s110/serializers/ble_gattc_char_value_by_uuid_read.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s110/serializers/ble_gattc_relationships_discover.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s110/serializers/ble_gatts_evt_hvc.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s110/serializers/ble_gap_evt_disconnected.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s110/serializers/ble_gatts_sys_attr_get.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s110/serializers/ble_gatts_hvx.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s110/serializers/ble_gatts_evt_write.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s110/serializers/ble_gap_evt_sec_info_request.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s110/serializers/ble_gattc_write.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s110/serializers/ble_gap_address_set.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s110/serializers/ble_gatts_sys_attr_set.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s110/serializers/ble_gatts_evt_sys_attr_missing.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s110/serializers/ble_gattc_evt_char_vals_read_rsp.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s110/serializers/ble_gatts_descriptor_add.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s110/serializers/ble_uuid_vs_add.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s110/serializers/ble_gap_evt_connected.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s110/serializers/ble_version_get.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s110/serializers/ble_gatts_evt_rw_authorize_request.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s110/serializers/ble_gatts_include_add.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s110/serializers/ble_gatts_evt_sc_confirm.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s110/serializers/ble_gatts_value_set.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s110/serializers/ble_gap_ppcp_set.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s110/serializers/ble_gatts_rw_authorize_reply.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s110/serializers/ble_gap_conn_param_update.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s110/serializers/ble_gattc_evt_read_rsp.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s110/serializers/temp_get.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s110/serializers/ble_gap_device_name_get.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s110/serializers/ble_gap_rssi_start.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s110/serializers/ble_uuid_decode.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s110/serializers/ble_gap_ppcp_get.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s110/serializers/ble_gap_evt_timeout.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s110/serializers/ble_event.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s110/serializers/ble_gap_evt_conn_sec_update.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s110/serializers/ble_gattc_char_values_read.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s110/serializers/ble_gattc_evt_hvx.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s110/serializers/ble_uuid_encode.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s110/serializers/ble_gap_evt_passkey_display.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s110/serializers/ble_gatts_evt_timeout.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s110/serializers/ble_gap_appearance_set.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s110/serializers/ble_gap_sec_params_reply.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s110/serializers/ble_tx_buffer_count_get.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s110/serializers/ble_gap_adv_stop.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s110/serializers/ble_gap_adv_start.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s110/serializers/ble_opt_get.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s110/serializers/ble_enable.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s110/serializers/ble_gattc_evt_rel_disc_rsp.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s110/serializers/ble_gattc_evt_char_disc_rsp.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s110/serializers/ble_gattc_hv_confirm.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s110/serializers/ble_gatts_service_add.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s110/serializers/ble_gattc_characteristics_discover.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s110/serializers/ble_gap_evt_sec_params_request.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s110/serializers/ble_gap_evt_auth_key_request.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s110/serializers/ble_gap_conn_sec_get.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s110/serializers/ble_gap_adv_data_set.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s110/serializers/ble_l2cap_cid_unregister.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s110/serializers/ble_evt_tx_complete.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s110/serializers/ble_gattc_descriptors_discover.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s110/serializers/ble_gattc_evt_prim_srvc_disc_rsp.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s110/serializers/ble_gap_evt_rssi_changed.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s110/serializers/ble_opt_set.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s110/serializers/power_system_off.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s110/serializers/ble_gattc_evt_timeout.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s110/serializers/ble_gap_address_get.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s110/serializers/ble_gatts_characteristic_add.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s110/serializers/ble_gap_evt_conn_param_update.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s110/serializers/ble_gattc_evt_char_val_by_uuid_read_rsp.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s110/serializers/ble_gatts_value_get.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s110/serializers/ble_gattc_primary_services_discover.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s110/serializers/ble_gap_disconnect.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s110/serializers/ble_gattc_evt_desc_disc_rsp.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s110/serializers/ble_gap_tx_power_set.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s110/serializers/ble_gatts_service_changed.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s110/serializers/ble_gap_auth_key_reply.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s110/serializers/ble_gattc_read.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s110/serializers/ble_gap_evt_auth_status.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s110/serializers/ble_l2cap_evt_rx.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s110/serializers/ble_gap_rssi_stop.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s110/serializers/ble_l2cap_cid_register.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s110/serializers/ble_gap_authenticate.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s110/serializers/ble_l2cap_tx.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s110/serializers/ble_gap_device_name_set.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s110/serializers/ble_gap_appearance_get.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s110/serializers/ble_gap_sec_info_reply.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s110/serializers/ble_gattc_evt_write_rsp.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s110/serializers/ble_gattc_char_value_by_uuid_read.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s110/serializers/ble_gattc_relationships_discover.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s110/serializers/ble_gatts_evt_hvc.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s110/serializers/ble_gap_evt_disconnected.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s110/serializers/ble_gatts_sys_attr_get.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s110/serializers/ble_gatts_hvx.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s110/serializers/ble_gatts_evt_write.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s110/serializers/ble_gap_evt_sec_info_request.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s110/serializers/ble_gattc_write.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s110/serializers/ble_gap_address_set.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s110/serializers/ble_gatts_sys_attr_set.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s110/serializers/ble_gatts_evt_sys_attr_missing.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s110/serializers/ble_gattc_evt_char_vals_read_rsp.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s110/serializers/ble_gatts_descriptor_add.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s110/serializers/ble_uuid_vs_add.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s110/serializers/ble_gap_evt_connected.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s110/serializers/ble_version_get.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s110/serializers/ble_gatts_evt_rw_authorize_request.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s110/serializers/ble_gatts_include_add.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s110/serializers/ble_gatts_evt_sc_confirm.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s110/serializers/ble_gatts_value_set.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s110/serializers/ble_gap_ppcp_set.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s110/serializers/ble_gatts_rw_authorize_reply.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s110/serializers/ble_gap_conn_param_update.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s110/serializers/ble_gattc_evt_read_rsp.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s110/serializers/temp_get.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s110/serializers/ble_gap_device_name_get.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s110/serializers/ble_gap_rssi_start.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s110/serializers/ble_uuid_decode.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s110/serializers/ble_gap_ppcp_get.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s110/serializers/ble_gap_evt_timeout.c
 C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s110/serializers/ble_event.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s110/serializers/ble_gap_evt_conn_sec_update.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s110/serializers/ble_gattc_char_values_read.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s110/serializers/ble_gattc_evt_hvx.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s110/serializers/ble_uuid_encode.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s110/serializers/ble_gap_evt_passkey_display.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s110/serializers/ble_gatts_evt_timeout.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s110/serializers/ble_gap_appearance_set.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s110/serializers/ble_gap_sec_params_reply.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s110/serializers/ble_tx_buffer_count_get.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s110/serializers/ble_gap_adv_stop.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s110/serializers/ble_gap_adv_start.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s110/serializers/ble_opt_get.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s110/serializers/ble_enable.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s110/serializers/ble_gap_sec_info_reply.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s110/serializers/ble_gatts_descriptor_add.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s110/serializers/ble_gattc_evt_timeout.c
 C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s110/serializers/ble_gattc_evt_rel_disc_rsp.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s110/serializers/ble_gattc_evt_char_disc_rsp.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s110/serializers/ble_gap_address_set.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s110/serializers/ble_gattc_evt_prim_srvc_disc_rsp.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s110/serializers/ble_gap_evt_connected.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s110/serializers/ble_gattc_descriptors_discover.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s110/serializers/ble_gap_rssi_start.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s110/serializers/ble_gap_rssi_stop.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s110/serializers/ble_l2cap_tx.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s110/serializers/ble_gatts_include_add.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s110/serializers/ble_gattc_evt_hvx.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s110/serializers/ble_gap_evt_conn_sec_update.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s110/serializers/ble_tx_buffer_count_get.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s110/serializers/ble_gap_authenticate.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s110/serializers/ble_version_get.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s110/serializers/ble_gatts_hvx.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s110/serializers/ble_gap_conn_sec_get.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s110/serializers/ble_gattc_evt_write_rsp.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s110/serializers/ble_gatts_sys_attr_get.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s110/serializers/ble_opt_get.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s110/serializers/ble_gatts_evt_sys_attr_missing.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s110/serializers/ble_gap_adv_start.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s110/serializers/ble_uuid_vs_add.c
 C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s110/serializers/ble_gattc_hv_confirm.c
 C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s110/serializers/ble_gatts_service_add.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s110/serializers/ble_gattc_characteristics_discover.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s110/serializers/ble_gap_evt_sec_params_request.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s110/serializers/ble_gap_evt_auth_key_request.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s110/serializers/ble_gap_conn_sec_get.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s110/serializers/ble_gap_adv_data_set.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s110/serializers/ble_gattc_evt_char_vals_read_rsp.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s110/serializers/ble_gattc_char_values_read.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s110/serializers/ble_gatts_rw_authorize_reply.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s110/serializers/ble_gap_appearance_get.c
 C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s110/serializers/ble_l2cap_cid_unregister.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s110/serializers/ble_evt_tx_complete.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s110/serializers/ble_gattc_descriptors_discover.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s110/serializers/ble_gattc_evt_prim_srvc_disc_rsp.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s110/serializers/ble_gap_evt_rssi_changed.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s110/serializers/ble_gattc_evt_desc_disc_rsp.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s110/serializers/ble_uuid_encode.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s110/serializers/ble_gap_conn_param_update.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s110/serializers/ble_gattc_characteristics_discover.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s110/serializers/ble_gattc_write.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s110/serializers/ble_gap_evt_sec_info_request.c
 C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s110/serializers/ble_opt_set.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s110/serializers/power_system_off.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s110/serializers/ble_gattc_evt_timeout.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s110/serializers/ble_gap_adv_stop.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s110/serializers/ble_gap_evt_timeout.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s110/serializers/ble_gap_device_name_get.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s110/serializers/ble_gatts_characteristic_add.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s110/serializers/ble_gap_appearance_set.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s110/serializers/ble_gattc_evt_char_val_by_uuid_read_rsp.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s110/serializers/ble_gap_evt_sec_params_request.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s110/serializers/ble_gap_evt_auth_status.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s110/serializers/temp_get.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s110/serializers/ble_gatts_service_changed.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s110/serializers/ble_gattc_evt_read_rsp.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s110/serializers/ble_gatts_evt_write.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s110/serializers/ble_gatts_sys_attr_set.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s110/serializers/ble_gattc_evt_char_disc_rsp.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s110/serializers/ble_gap_adv_data_set.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s110/serializers/ble_gattc_relationships_discover.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s110/serializers/ble_gap_evt_passkey_display.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s110/serializers/ble_l2cap_cid_register.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s110/serializers/ble_gap_evt_auth_key_request.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s110/serializers/ble_gap_ppcp_set.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s110/serializers/ble_gatts_evt_hvc.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s110/serializers/ble_evt_tx_complete.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s110/serializers/ble_gap_sec_params_reply.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s110/serializers/ble_gatts_value_set.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s110/serializers/ble_l2cap_evt_rx.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s110/serializers/ble_uuid_decode.c
 C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s110/serializers/ble_gap_address_get.c
-INC_PATHS += -I $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s110/serializers
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s110/serializers/ble_gap_evt_conn_param_update.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s110/serializers/ble_gatts_evt_rw_authorize_request.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s110/serializers/ble_gap_evt_rssi_changed.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s110/serializers/ble_gap_tx_power_set.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s110/serializers/ble_gap_disconnect.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s110/serializers/power_system_off.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s110/serializers/ble_gatts_value_get.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s110/serializers/ble_gattc_read.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s110/serializers/ble_gap_device_name_set.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s110/serializers/ble_gatts_evt_sc_confirm.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s110/serializers/ble_gap_ppcp_get.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s110/serializers/ble_gatts_evt_timeout.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s110/serializers/ble_gattc_char_value_by_uuid_read.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s110/serializers/ble_enable.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s110/serializers/ble_gap_auth_key_reply.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s110/serializers/ble_gap_evt_disconnected.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s110/serializers/ble_gattc_primary_services_discover.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s110/serializers/ble_event.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s110/serializers/ble_gap_sec_info_reply.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s110/serializers/ble_gatts_descriptor_add.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s110/serializers/ble_gattc_evt_timeout.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s110/serializers/ble_gattc_evt_rel_disc_rsp.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s110/serializers/ble_gap_address_set.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s110/serializers/ble_gattc_evt_prim_srvc_disc_rsp.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s110/serializers/ble_gap_evt_connected.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s110/serializers/ble_gattc_descriptors_discover.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s110/serializers/ble_gap_rssi_start.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s110/serializers/ble_gap_rssi_stop.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s110/serializers/ble_l2cap_tx.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s110/serializers/ble_gatts_include_add.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s110/serializers/ble_gattc_evt_hvx.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s110/serializers/ble_gap_evt_conn_sec_update.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s110/serializers/ble_tx_buffer_count_get.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s110/serializers/ble_gap_authenticate.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s110/serializers/ble_version_get.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s110/serializers/ble_gatts_hvx.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s110/serializers/ble_gap_conn_sec_get.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s110/serializers/ble_gattc_evt_write_rsp.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s110/serializers/ble_gatts_sys_attr_get.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s110/serializers/ble_opt_get.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s110/serializers/ble_gatts_evt_sys_attr_missing.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s110/serializers/ble_gap_adv_start.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s110/serializers/ble_uuid_vs_add.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s110/serializers/ble_gattc_hv_confirm.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s110/serializers/ble_gatts_service_add.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s110/serializers/ble_gattc_evt_char_vals_read_rsp.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s110/serializers/ble_gattc_char_values_read.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s110/serializers/ble_gatts_rw_authorize_reply.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s110/serializers/ble_gap_appearance_get.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s110/serializers/ble_l2cap_cid_unregister.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s110/serializers/ble_gattc_evt_desc_disc_rsp.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s110/serializers/ble_uuid_encode.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s110/serializers/ble_gap_conn_param_update.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s110/serializers/ble_gattc_characteristics_discover.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s110/serializers/ble_gattc_write.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s110/serializers/ble_gap_evt_sec_info_request.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s110/serializers/ble_opt_set.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s110/serializers/ble_gap_adv_stop.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s110/serializers/ble_gap_evt_timeout.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s110/serializers/ble_gap_device_name_get.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s110/serializers/ble_gatts_characteristic_add.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s110/serializers/ble_gap_appearance_set.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s110/serializers/ble_gattc_evt_char_val_by_uuid_read_rsp.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s110/serializers/ble_gap_evt_sec_params_request.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s110/serializers/ble_gap_evt_auth_status.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s110/serializers/temp_get.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s110/serializers/ble_gatts_service_changed.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s110/serializers/ble_gattc_evt_read_rsp.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s110/serializers/ble_gatts_evt_write.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s110/serializers/ble_gatts_sys_attr_set.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s110/serializers/ble_gattc_evt_char_disc_rsp.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s110/serializers/ble_gap_adv_data_set.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s110/serializers/ble_gattc_relationships_discover.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s110/serializers/ble_gap_evt_passkey_display.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s110/serializers/ble_l2cap_cid_register.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s110/serializers/ble_gap_evt_auth_key_request.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s110/serializers/ble_gap_ppcp_set.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s110/serializers/ble_gatts_evt_hvc.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s110/serializers/ble_evt_tx_complete.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s110/serializers/ble_gap_sec_params_reply.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s110/serializers/ble_gatts_value_set.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s110/serializers/ble_l2cap_evt_rx.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s110/serializers/ble_uuid_decode.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s110/serializers/ble_gap_address_get.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s110/serializers/ble_gap_evt_conn_param_update.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s110/serializers/ble_gatts_evt_rw_authorize_request.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s110/serializers/ble_gap_evt_rssi_changed.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s110/serializers/ble_gap_tx_power_set.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s110/serializers/ble_gap_disconnect.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s110/serializers/power_system_off.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s110/serializers/ble_gatts_value_get.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s110/serializers/ble_gattc_read.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s110/serializers/ble_gap_device_name_set.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s110/serializers/ble_gatts_evt_sc_confirm.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s110/serializers/ble_opt_id_pre_decoder.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s110/serializers/ble_gap_ppcp_get.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s110/serializers/ble_gatts_evt_timeout.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s110/serializers/ble_gattc_char_value_by_uuid_read.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s110/serializers/ble_enable.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s110/serializers/ble_gap_auth_key_reply.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s110/serializers/ble_gap_evt_disconnected.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s110/serializers/ble_gattc_primary_services_discover.c
+INC_PATHS += -I $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s110/serializers
 endif
 
 ifeq ($(SDK_S120_HEADERS),yes)
@@ -422,8 +422,8 @@ INC_PATHS += -I $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/ble/ble_services/bl
 endif
 
 ifeq ($(SDK_LIBRARIES_GPIOTE),yes)
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/libraries/gpiote/app_gpiote_fast_detect.c
 C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/libraries/gpiote/app_gpiote.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/libraries/gpiote/app_gpiote_fast_detect.c
 INC_PATHS += -I $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/libraries/gpiote
 endif
 
@@ -452,11 +452,11 @@ INC_PATHS += -I $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/drivers_nrf/nrf_soc
 endif
 
 ifeq ($(SDK_CODECS_COMMON),yes)
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/common/ble_dtm_init.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/common/ble_dtm_app.c
 C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/common/conn_mw.c
 C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/common/ble_dtm_init.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/common/ble_dtm_app.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/common/ble_dtm_init.c
-INC_PATHS += -I $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/common
+INC_PATHS += -I $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/common
 endif
 
 ifeq ($(SDK_BLE_BLE_DEBUG_ASSERT_HANDLER),yes)
@@ -478,10 +478,10 @@ INC_PATHS += -I $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/softdevice/s310/hea
 endif
 
 ifeq ($(SDK_PROPERITARY_RF_GZLL),yes)
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/properitary_rf/gzll/nrf_gzp.c
 C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/properitary_rf/gzll/nrf_gzp_device.c
 C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/properitary_rf/gzll/nrf_gzp_host.c
 C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/properitary_rf/gzll/nrf_gzp_host_nrf51.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/properitary_rf/gzll/nrf_gzp.c
 INC_PATHS += -I $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/properitary_rf/gzll
 endif
 
@@ -490,9 +490,9 @@ C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/drivers_ext/mpu60
 INC_PATHS += -I $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/drivers_ext/mpu6050
 endif
 
-ifeq ($(SDK_CONNECTIVITY_HAL),yes)
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/hal/dtm_uart.c
-INC_PATHS += -I $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/hal
+ifeq ($(SDK_DRIVERS_EXT_SYNAPTICS_TOUCHPAD),yes)
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/drivers_ext/synaptics_touchpad/synaptics_touchpad.c
+INC_PATHS += -I $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/drivers_ext/synaptics_touchpad
 endif
 
 ifeq ($(SDK_COMMON_TRANSPORT),yes)
@@ -500,9 +500,9 @@ C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/com
 INC_PATHS += -I $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/common/transport
 endif
 
-ifeq ($(SDK_LIBRARIES_TRACE),yes)
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/libraries/trace/app_trace.c
-INC_PATHS += -I $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/libraries/trace
+ifeq ($(SDK_BLE_SERVICES_BLE_BPS),yes)
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/ble/ble_services/ble_bps/ble_bps.c
+INC_PATHS += -I $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/ble/ble_services/ble_bps
 endif
 
 ifeq ($(SDK_DRIVERS_NRF_SPI_MASTER),yes)
@@ -511,14 +511,14 @@ C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/drivers_nrf/spi_m
 INC_PATHS += -I $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/drivers_nrf/spi_master
 endif
 
-ifeq ($(SDK_DRIVERS_EXT_SYNAPTICS_TOUCHPAD),yes)
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/drivers_ext/synaptics_touchpad/synaptics_touchpad.c
-INC_PATHS += -I $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/drivers_ext/synaptics_touchpad
+ifeq ($(SDK_CONNECTIVITY_HAL),yes)
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/hal/dtm_uart.c
+INC_PATHS += -I $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/hal
 endif
 
-ifeq ($(SDK_BLE_SERVICES_BLE_BPS),yes)
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/ble/ble_services/ble_bps/ble_bps.c
-INC_PATHS += -I $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/ble/ble_services/ble_bps
+ifeq ($(SDK_LIBRARIES_TRACE),yes)
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/libraries/trace/app_trace.c
+INC_PATHS += -I $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/libraries/trace
 endif
 
 ifeq ($(SDK_SER_PHY_CONFIG),yes)
@@ -526,191 +526,191 @@ INC_PATHS += -I $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/commo
 endif
 
 ifeq ($(SDK_S120_SERIALIZERS),yes)
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s120/serializers/ble_gatts_characteristic_add.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s120/serializers/ble_gap_evt_conn_param_update.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s120/serializers/ble_gap_evt_adv_report.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s120/serializers/ble_gattc_evt_char_val_by_uuid_read_rsp.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s120/serializers/ble_gatts_value_get.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s120/serializers/ble_gattc_primary_services_discover.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s120/serializers/ble_gap_disconnect.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s120/serializers/ble_gattc_evt_desc_disc_rsp.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s120/serializers/ble_gap_tx_power_set.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s120/serializers/ble_gatts_service_changed.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s120/serializers/ble_gap_auth_key_reply.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s120/serializers/ble_gattc_read.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s120/serializers/ble_gap_encrypt.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s120/serializers/ble_gap_connect_cancel.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s120/serializers/ble_gap_evt_auth_status.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s120/serializers/ble_l2cap_evt_rx.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s120/serializers/ble_gap_rssi_stop.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s120/serializers/ble_l2cap_cid_register.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s120/serializers/ble_gap_authenticate.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s120/serializers/ble_l2cap_tx.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s120/serializers/ble_gap_device_name_set.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s120/serializers/ble_gap_scan_start.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s120/serializers/ble_gap_appearance_get.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s120/serializers/ble_gap_sec_info_reply.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s120/serializers/ble_gattc_evt_write_rsp.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s120/serializers/ble_gattc_char_value_by_uuid_read.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s120/serializers/ble_gattc_relationships_discover.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s120/serializers/ble_gatts_evt_hvc.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s120/serializers/ble_gap_evt_disconnected.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s120/serializers/ble_gatts_sys_attr_get.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s120/serializers/ble_gatts_hvx.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s120/serializers/ble_gatts_evt_write.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s120/serializers/ble_gap_evt_sec_info_request.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s120/serializers/ble_gattc_write.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s120/serializers/ble_gap_address_set.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s120/serializers/ble_gatts_sys_attr_set.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s120/serializers/ble_gatts_evt_sys_attr_missing.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s120/serializers/ble_gattc_evt_char_vals_read_rsp.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s120/serializers/ble_gatts_descriptor_add.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s120/serializers/ble_uuid_vs_add.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s120/serializers/ble_gap_evt_connected.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s120/serializers/ble_version_get.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s120/serializers/ble_gatts_evt_rw_authorize_request.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s120/serializers/ble_gatts_include_add.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s120/serializers/ble_gap_evt_conn_param_update_request.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s120/serializers/ble_gatts_evt_sc_confirm.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s120/serializers/ble_gatts_value_set.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s120/serializers/ble_gap_ppcp_set.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s120/serializers/ble_gatts_rw_authorize_reply.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s120/serializers/ble_gap_conn_param_update.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s120/serializers/ble_gattc_evt_read_rsp.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s120/serializers/temp_get.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s120/serializers/ble_gap_device_name_get.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s120/serializers/ble_gap_rssi_start.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s120/serializers/ble_uuid_decode.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s120/serializers/ble_gap_ppcp_get.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s120/serializers/ble_gap_evt_timeout.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s120/serializers/ble_event.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s120/serializers/ble_gap_evt_conn_sec_update.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s120/serializers/ble_gattc_char_values_read.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s120/serializers/ble_gattc_evt_hvx.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s120/serializers/ble_uuid_encode.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s120/serializers/ble_gap_evt_passkey_display.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s120/serializers/ble_gatts_evt_timeout.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s120/serializers/ble_gap_appearance_set.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s120/serializers/ble_gap_sec_params_reply.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s120/serializers/ble_tx_buffer_count_get.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s120/serializers/ble_gap_adv_stop.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s120/serializers/ble_gap_adv_start.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s120/serializers/ble_gap_scan_stop.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s120/serializers/conn_ble_gap_sec_keys.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s120/serializers/ble_opt_get.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s120/serializers/ble_gattc_evt_rel_disc_rsp.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s120/serializers/ble_gattc_evt_char_disc_rsp.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s120/serializers/ble_gattc_hv_confirm.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s120/serializers/ble_gatts_service_add.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s120/serializers/ble_gattc_characteristics_discover.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s120/serializers/ble_gap_evt_sec_params_request.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s120/serializers/ble_gap_connect.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s120/serializers/ble_gap_evt_auth_key_request.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s120/serializers/ble_gap_evt_sec_request.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s120/serializers/ble_gap_conn_sec_get.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s120/serializers/ble_gap_adv_data_set.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s120/serializers/ble_l2cap_cid_unregister.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s120/serializers/ble_evt_tx_complete.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s120/serializers/ble_gattc_descriptors_discover.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s120/serializers/ble_gattc_evt_prim_srvc_disc_rsp.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s120/serializers/ble_gap_evt_rssi_changed.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s120/serializers/ble_opt_set.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s120/serializers/power_system_off.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s120/serializers/ble_gattc_evt_timeout.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s120/serializers/ble_gap_address_get.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s120/serializers/app_ble_gap_sec_keys.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s120/serializers/ble_gatts_characteristic_add.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s120/serializers/ble_gap_evt_conn_param_update.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s120/serializers/ble_gap_evt_adv_report.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s120/serializers/ble_gattc_evt_char_val_by_uuid_read_rsp.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s120/serializers/ble_gatts_value_get.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s120/serializers/ble_gattc_primary_services_discover.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s120/serializers/ble_gap_disconnect.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s120/serializers/ble_gattc_evt_desc_disc_rsp.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s120/serializers/ble_gap_tx_power_set.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s120/serializers/ble_gatts_service_changed.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s120/serializers/ble_gap_auth_key_reply.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s120/serializers/ble_gattc_read.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s120/serializers/ble_gap_encrypt.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s120/serializers/ble_gap_connect_cancel.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s120/serializers/ble_gap_evt_auth_status.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s120/serializers/ble_l2cap_evt_rx.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s120/serializers/ble_gap_rssi_stop.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s120/serializers/ble_l2cap_cid_register.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s120/serializers/ble_gap_authenticate.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s120/serializers/ble_l2cap_tx.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s120/serializers/ble_gap_device_name_set.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s120/serializers/ble_gap_scan_start.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s120/serializers/ble_gap_appearance_get.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s120/serializers/ble_gap_sec_info_reply.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s120/serializers/ble_gattc_evt_write_rsp.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s120/serializers/ble_gattc_char_value_by_uuid_read.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s120/serializers/ble_gattc_relationships_discover.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s120/serializers/ble_gatts_evt_hvc.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s120/serializers/ble_gap_evt_disconnected.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s120/serializers/ble_gatts_sys_attr_get.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s120/serializers/ble_gatts_hvx.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s120/serializers/ble_gatts_evt_write.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s120/serializers/ble_gap_evt_sec_info_request.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s120/serializers/ble_gattc_write.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s120/serializers/ble_gap_address_set.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s120/serializers/ble_gatts_sys_attr_set.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s120/serializers/ble_gatts_evt_sys_attr_missing.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s120/serializers/ble_gattc_evt_char_vals_read_rsp.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s120/serializers/ble_gatts_descriptor_add.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s120/serializers/ble_uuid_vs_add.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s120/serializers/ble_gap_evt_connected.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s120/serializers/ble_version_get.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s120/serializers/ble_gatts_evt_rw_authorize_request.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s120/serializers/ble_gatts_include_add.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s120/serializers/ble_gap_evt_conn_param_update_request.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s120/serializers/ble_gatts_evt_sc_confirm.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s120/serializers/ble_gatts_value_set.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s120/serializers/ble_gap_ppcp_set.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s120/serializers/ble_gatts_rw_authorize_reply.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s120/serializers/ble_gap_conn_param_update.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s120/serializers/ble_gattc_evt_read_rsp.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s120/serializers/temp_get.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s120/serializers/ble_gap_device_name_get.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s120/serializers/ble_gap_rssi_start.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s120/serializers/ble_uuid_decode.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s120/serializers/ble_gap_ppcp_get.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s120/serializers/ble_gap_evt_timeout.c
 C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s120/serializers/ble_event.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s120/serializers/ble_gap_evt_conn_sec_update.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s120/serializers/ble_gattc_char_values_read.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s120/serializers/ble_gattc_evt_hvx.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s120/serializers/ble_uuid_encode.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s120/serializers/ble_gap_evt_passkey_display.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s120/serializers/ble_gatts_evt_timeout.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s120/serializers/ble_gap_appearance_set.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s120/serializers/ble_gap_sec_params_reply.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s120/serializers/ble_tx_buffer_count_get.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s120/serializers/ble_gap_adv_stop.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s120/serializers/ble_gap_adv_start.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s120/serializers/ble_gap_scan_stop.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s120/serializers/ble_opt_get.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s120/serializers/ble_gap_sec_info_reply.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s120/serializers/ble_gatts_descriptor_add.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s120/serializers/ble_gattc_evt_timeout.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s120/serializers/ble_gap_connect_cancel.c
 C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s120/serializers/ble_gattc_evt_rel_disc_rsp.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s120/serializers/ble_gattc_evt_char_disc_rsp.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s120/serializers/ble_gap_address_set.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s120/serializers/ble_gattc_evt_prim_srvc_disc_rsp.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s120/serializers/ble_gap_evt_connected.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s120/serializers/ble_gattc_descriptors_discover.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s120/serializers/ble_gap_rssi_start.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s120/serializers/ble_gap_rssi_stop.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s120/serializers/ble_l2cap_tx.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s120/serializers/ble_gatts_include_add.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s120/serializers/ble_gattc_evt_hvx.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s120/serializers/ble_gap_evt_conn_sec_update.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s120/serializers/ble_tx_buffer_count_get.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s120/serializers/ble_gap_authenticate.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s120/serializers/ble_gap_evt_sec_request.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s120/serializers/ble_version_get.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s120/serializers/ble_gatts_hvx.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s120/serializers/ble_gap_encrypt.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s120/serializers/ble_gap_conn_sec_get.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s120/serializers/ble_gattc_evt_write_rsp.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s120/serializers/ble_gatts_sys_attr_get.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s120/serializers/ble_opt_get.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s120/serializers/ble_gatts_evt_sys_attr_missing.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s120/serializers/ble_gap_adv_start.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s120/serializers/ble_uuid_vs_add.c
 C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s120/serializers/ble_gattc_hv_confirm.c
 C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s120/serializers/ble_gatts_service_add.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s120/serializers/ble_gattc_characteristics_discover.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s120/serializers/ble_gap_evt_sec_params_request.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s120/serializers/ble_gap_connect.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s120/serializers/ble_gap_evt_auth_key_request.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s120/serializers/ble_gap_evt_sec_request.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s120/serializers/ble_gap_conn_sec_get.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s120/serializers/ble_gap_adv_data_set.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s120/serializers/ble_gap_evt_adv_report.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s120/serializers/ble_gattc_evt_char_vals_read_rsp.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s120/serializers/ble_gattc_char_values_read.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s120/serializers/ble_gatts_rw_authorize_reply.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s120/serializers/ble_gap_appearance_get.c
 C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s120/serializers/ble_l2cap_cid_unregister.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s120/serializers/ble_evt_tx_complete.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s120/serializers/ble_gattc_descriptors_discover.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s120/serializers/ble_gattc_evt_prim_srvc_disc_rsp.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s120/serializers/ble_gap_evt_rssi_changed.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s120/serializers/ble_gattc_evt_desc_disc_rsp.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s120/serializers/ble_uuid_encode.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s120/serializers/ble_gap_conn_param_update.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s120/serializers/ble_gattc_characteristics_discover.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s120/serializers/ble_gattc_write.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s120/serializers/ble_gap_evt_sec_info_request.c
 C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s120/serializers/ble_opt_set.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s120/serializers/power_system_off.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s120/serializers/ble_gattc_evt_timeout.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s120/serializers/ble_gap_adv_stop.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s120/serializers/ble_gap_evt_timeout.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s120/serializers/ble_gap_device_name_get.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s120/serializers/ble_gatts_characteristic_add.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s120/serializers/ble_gap_appearance_set.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s120/serializers/ble_gattc_evt_char_val_by_uuid_read_rsp.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s120/serializers/ble_gap_evt_sec_params_request.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s120/serializers/ble_gap_scan_stop.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s120/serializers/ble_gap_evt_auth_status.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s120/serializers/temp_get.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s120/serializers/ble_gatts_service_changed.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s120/serializers/ble_gattc_evt_read_rsp.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s120/serializers/ble_gatts_evt_write.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s120/serializers/ble_gatts_sys_attr_set.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s120/serializers/ble_gattc_evt_char_disc_rsp.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s120/serializers/ble_gap_adv_data_set.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s120/serializers/app_ble_gap_sec_keys.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s120/serializers/ble_gattc_relationships_discover.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s120/serializers/ble_gap_evt_passkey_display.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s120/serializers/ble_l2cap_cid_register.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s120/serializers/ble_gap_evt_auth_key_request.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s120/serializers/ble_gap_ppcp_set.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s120/serializers/ble_gap_scan_start.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s120/serializers/ble_gatts_evt_hvc.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s120/serializers/ble_evt_tx_complete.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s120/serializers/ble_gap_sec_params_reply.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s120/serializers/ble_gatts_value_set.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s120/serializers/ble_l2cap_evt_rx.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s120/serializers/ble_uuid_decode.c
 C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s120/serializers/ble_gap_address_get.c
-INC_PATHS += -I $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s120/serializers
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s120/serializers/ble_gap_evt_conn_param_update.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s120/serializers/ble_gatts_evt_rw_authorize_request.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s120/serializers/ble_gap_evt_rssi_changed.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s120/serializers/ble_gap_evt_conn_param_update_request.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s120/serializers/ble_gap_tx_power_set.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s120/serializers/ble_gap_disconnect.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s120/serializers/power_system_off.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s120/serializers/ble_gatts_value_get.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s120/serializers/ble_gattc_read.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s120/serializers/ble_gap_device_name_set.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s120/serializers/ble_gatts_evt_sc_confirm.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s120/serializers/ble_gap_ppcp_get.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s120/serializers/ble_gap_connect.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s120/serializers/ble_gatts_evt_timeout.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s120/serializers/ble_gattc_char_value_by_uuid_read.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s120/serializers/ble_gap_auth_key_reply.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s120/serializers/ble_gap_evt_disconnected.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/application/codecs/s120/serializers/ble_gattc_primary_services_discover.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s120/serializers/ble_event.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s120/serializers/ble_gap_sec_info_reply.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s120/serializers/ble_gatts_descriptor_add.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s120/serializers/ble_gattc_evt_timeout.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s120/serializers/ble_gap_connect_cancel.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s120/serializers/ble_gattc_evt_rel_disc_rsp.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s120/serializers/ble_gap_address_set.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s120/serializers/ble_gattc_evt_prim_srvc_disc_rsp.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s120/serializers/ble_gap_evt_connected.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s120/serializers/ble_gattc_descriptors_discover.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s120/serializers/ble_gap_rssi_start.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s120/serializers/ble_gap_rssi_stop.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s120/serializers/ble_l2cap_tx.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s120/serializers/ble_gatts_include_add.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s120/serializers/ble_gattc_evt_hvx.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s120/serializers/ble_gap_evt_conn_sec_update.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s120/serializers/ble_tx_buffer_count_get.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s120/serializers/ble_gap_authenticate.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s120/serializers/ble_gap_evt_sec_request.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s120/serializers/ble_version_get.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s120/serializers/ble_gatts_hvx.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s120/serializers/ble_gap_encrypt.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s120/serializers/ble_gap_conn_sec_get.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s120/serializers/ble_gattc_evt_write_rsp.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s120/serializers/ble_gatts_sys_attr_get.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s120/serializers/conn_ble_gap_sec_keys.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s120/serializers/ble_opt_get.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s120/serializers/ble_gatts_evt_sys_attr_missing.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s120/serializers/ble_gap_adv_start.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s120/serializers/ble_uuid_vs_add.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s120/serializers/ble_gattc_hv_confirm.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s120/serializers/ble_gatts_service_add.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s120/serializers/ble_gap_evt_adv_report.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s120/serializers/ble_gattc_evt_char_vals_read_rsp.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s120/serializers/ble_gattc_char_values_read.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s120/serializers/ble_gatts_rw_authorize_reply.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s120/serializers/ble_gap_appearance_get.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s120/serializers/ble_l2cap_cid_unregister.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s120/serializers/ble_gattc_evt_desc_disc_rsp.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s120/serializers/ble_uuid_encode.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s120/serializers/ble_gap_conn_param_update.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s120/serializers/ble_gattc_characteristics_discover.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s120/serializers/ble_gattc_write.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s120/serializers/ble_gap_evt_sec_info_request.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s120/serializers/ble_opt_set.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s120/serializers/ble_gap_adv_stop.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s120/serializers/ble_gap_evt_timeout.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s120/serializers/ble_gap_device_name_get.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s120/serializers/ble_gatts_characteristic_add.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s120/serializers/ble_gap_appearance_set.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s120/serializers/ble_gattc_evt_char_val_by_uuid_read_rsp.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s120/serializers/ble_gap_evt_sec_params_request.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s120/serializers/ble_gap_scan_stop.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s120/serializers/ble_gap_evt_auth_status.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s120/serializers/temp_get.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s120/serializers/ble_gatts_service_changed.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s120/serializers/ble_gattc_evt_read_rsp.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s120/serializers/ble_gatts_evt_write.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s120/serializers/ble_gatts_sys_attr_set.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s120/serializers/ble_gattc_evt_char_disc_rsp.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s120/serializers/ble_gap_adv_data_set.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s120/serializers/ble_gattc_relationships_discover.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s120/serializers/ble_gap_evt_passkey_display.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s120/serializers/ble_l2cap_cid_register.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s120/serializers/ble_gap_evt_auth_key_request.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s120/serializers/ble_gap_ppcp_set.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s120/serializers/ble_gap_scan_start.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s120/serializers/ble_gatts_evt_hvc.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s120/serializers/ble_evt_tx_complete.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s120/serializers/ble_gap_sec_params_reply.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s120/serializers/ble_gatts_value_set.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s120/serializers/ble_l2cap_evt_rx.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s120/serializers/ble_uuid_decode.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s120/serializers/ble_gap_address_get.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s120/serializers/ble_gap_evt_conn_param_update.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s120/serializers/ble_gatts_evt_rw_authorize_request.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s120/serializers/ble_gap_evt_rssi_changed.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s120/serializers/ble_gap_evt_conn_param_update_request.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s120/serializers/ble_gap_tx_power_set.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s120/serializers/ble_gap_disconnect.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s120/serializers/power_system_off.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s120/serializers/ble_gatts_value_get.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s120/serializers/ble_gattc_read.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s120/serializers/ble_gap_device_name_set.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s120/serializers/ble_gatts_evt_sc_confirm.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s120/serializers/ble_gap_ppcp_get.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s120/serializers/ble_gap_connect.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s120/serializers/ble_gatts_evt_timeout.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s120/serializers/ble_gattc_char_value_by_uuid_read.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s120/serializers/ble_gap_auth_key_reply.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s120/serializers/ble_gap_evt_disconnected.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s120/serializers/ble_gattc_primary_services_discover.c
+INC_PATHS += -I $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/connectivity/codecs/s120/serializers
 endif
 
 ifeq ($(SDK_APPLICATION_TRANSPORT),yes)
@@ -747,8 +747,8 @@ INC_PATHS += -I $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/libraries/bootloade
 endif
 
 ifeq ($(SDK_LIBRARIES_UTIL),yes)
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/libraries/util/app_error.c
 C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/libraries/util/nrf_assert.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/libraries/util/app_error.c
 C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/libraries/util/app_util_platform.c
 INC_PATHS += -I $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/libraries/util
 endif
@@ -764,8 +764,8 @@ INC_PATHS += -I $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/drivers_nrf/radio_c
 endif
 
 ifeq ($(SDK_LIBRARIES_SCHEDULER),yes)
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/libraries/scheduler/app_scheduler.c
 C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/libraries/scheduler/app_scheduler_serconn.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/libraries/scheduler/app_scheduler.c
 INC_PATHS += -I $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/libraries/scheduler
 endif
 
@@ -789,9 +789,9 @@ INC_PATHS += -I $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/ble/ble_services/bl
 endif
 
 ifeq ($(SDK_LIBRARIES_HCI),yes)
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/libraries/hci/hci_transport.c
 C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/libraries/hci/hci_mem_pool.c
 C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/libraries/hci/hci_slip.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/libraries/hci/hci_transport.c
 INC_PATHS += -I $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/libraries/hci
 endif
 
@@ -802,8 +802,8 @@ endif
 
 ifeq ($(SDK_DRIVERS_NRF_HAL),yes)
 C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/drivers_nrf/hal/nrf_ecb.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/drivers_nrf/hal/nrf_nvmc.c
 C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/drivers_nrf/hal/nrf_delay.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/drivers_nrf/hal/nrf_nvmc.c
 INC_PATHS += -I $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/drivers_nrf/hal
 endif
 
@@ -834,15 +834,15 @@ SRCS_AS += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/toolchain/gcc/gcc_startu
 endif
 
 ifeq ($(SDK_LIBRARIES_BOOTLOADER_DFU),yes)
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/libraries/bootloader_dfu/dfu_transport_serial.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/libraries/bootloader_dfu/bootloader_util_gcc.c
 C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/libraries/bootloader_dfu/bootloader_settings_arm.c
 C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/libraries/bootloader_dfu/dfu_dual_bank.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/libraries/bootloader_dfu/dfu_single_bank.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/libraries/bootloader_dfu/dfu_init_template.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/libraries/bootloader_dfu/bootloader_util_arm.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/libraries/bootloader_dfu/bootloader.c
 C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/libraries/bootloader_dfu/dfu_transport_ble.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/libraries/bootloader_dfu/dfu_transport_serial.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/libraries/bootloader_dfu/bootloader_util_arm.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/libraries/bootloader_dfu/dfu_init_template.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/libraries/bootloader_dfu/bootloader.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/libraries/bootloader_dfu/bootloader_util_gcc.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/libraries/bootloader_dfu/dfu_single_bank.c
 INC_PATHS += -I $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/libraries/bootloader_dfu
 endif
 
@@ -867,10 +867,10 @@ INC_PATHS += -I $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/ble/ble_services/bl
 endif
 
 ifeq ($(SDK_STRUCT_SER_S110),yes)
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/common/struct_ser/s110/ble_gatts_struct_serialization.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/common/struct_ser/s110/ble_gap_struct_serialization.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/common/struct_ser/s110/ble_gattc_struct_serialization.c
 C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/common/struct_ser/s110/ble_struct_serialization.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/common/struct_ser/s110/ble_gap_struct_serialization.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/common/struct_ser/s110/ble_gatts_struct_serialization.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/common/struct_ser/s110/ble_gattc_struct_serialization.c
 INC_PATHS += -I $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/serialization/common/struct_ser/s110
 endif
 
@@ -881,10 +881,10 @@ INC_PATHS += -I $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/ble/ble_services/bl
 endif
 
 ifeq ($(SDK_BLE_COMMON),yes)
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/ble/common/ble_advdata.c
 C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/ble/common/ble_conn_params.c
-C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/ble/common/ble_advdata_parser.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/ble/common/ble_advdata.c
 C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/ble/common/ble_srv_common.c
+C_SOURCE_FILES += $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/ble/common/ble_advdata_parser.c
 INC_PATHS += -I $(SDK_INSTALL_DIR)/$(SDK_VERSION)/components/ble/common
 endif
 

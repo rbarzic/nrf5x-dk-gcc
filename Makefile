@@ -25,8 +25,14 @@ CHIP=nRF51422-QFAC
 #  The nRF51-DK and nRF51-Dongle is using the nRF51422-QFAC variant of the chip
 BOARD =  nRF51_DK # Where is the nRF51 board file ?
 
-SDK_VERSION=nRF51_SDK_7.2.0_cf547b5
-SDK_URL=http://developer.nordicsemi.com/nRF51_SDK
+SDK_TYPE=8.x.x
+SDK_VERSION=nRF51_SDK_8.1.0_b6ed55f
+SDK_URL=http://developer.nordicsemi.com/nRF51_SDK/nRF51_SDK_v8.x.x
+
+#SDK_TYPE=7.x.x
+#SDK_VERSION=nRF51_SDK_7.2.0_cf547b5
+#SDK_URL=http://developer.nordicsemi.com/nRF51_SDK/nRF51_SDK_v7.x.x
+
 
 SDK_INSTALL_DIR=../../nordic
 USE_SOFT_DEVICE=no
@@ -44,6 +50,6 @@ SDK_DRIVERS_NRF_HAL=yes
 # Don't touch lines below
 include misc/nRF51_Devices.mk
 include misc/SDK_Makefile.mk
-include misc/Makefile
+include misc/Main.mk
 include misc/nrftools_jlink.mk
 include misc/check.mk
