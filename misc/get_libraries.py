@@ -4,6 +4,10 @@ import argparse
 import fnmatch
 import pprint as pp
 
+allowed_top_dirs = ['components']
+# Special files that should be handled specially
+ignored_files = ['gcc_startup_nrf52.s','gcc_startup_nrf51.s']
+
 
 def get_args():
     """
@@ -32,7 +36,7 @@ def find_files(dir, pattern):
                 yield filename
 
 
-allowed_top_dirs = ['components']
+
 
 if __name__ == '__main__':
     args = get_args()
@@ -58,7 +62,7 @@ if __name__ == '__main__':
         #print "Submodule", submodule
         #print "Module ", module
         # print "Base2 ", base2
-        if top_dir in allowed_top_dirs:
+        if (top_dir in allowed_top_dirs) and (file_name not in ignored_files):
             if extension == 'c':
                 modules.setdefault(module + '_' + submodule, []).append(relative_path)
             if extension == 's':

@@ -26,8 +26,16 @@ INC_PATHS += -I$(SDK_PATH)/components/device         # SDK 8.x.x
 INC_PATHS += -I$(SDK_PATH)/bsp
 
 
-
+ifeq ($(DEVICE),NRF51)
 CPUFLAGS += -mthumb -mcpu=cortex-m0 -march=armv6-m
+endif
+
+ifeq ($(DEVICE),NRF52)
+CPUFLAGS += -mthumb -mcpu=cortex-m4 
+endif
+
+
+
 CFLAGS += -std=gnu99 -c $(CPUFLAGS) -Wall -D$(DEVICE) -D$(BOARD)   -MD
 CFLAGS += $(INC_PATHS)
 
@@ -40,6 +48,8 @@ OBJS_AS = $(SRCS_AS:.s=.os) #  fix name
 HEX = $(PROJECT_NAME).hex
 ELF = $(PROJECT_NAME).elf
 BIN = $(PROJECT_NAME).bin
+
+ifeq ($(DEVICE),NRF51)
 
 ifeq ($(SDK_TYPE),7.x.x)
 ifeq  ($(USE_SOFT_DEVICE),no)
@@ -60,6 +70,27 @@ LINKER_SCRIPT ?= $(LINKER_SCRIPT_TOP_DIR)/nrf51_$(LINKER_FILE_SUFFIX).ld  # FIXM
 endif
 
 endif
+
+endif  # NRF51
+
+
+
+ifeq ($(DEVICE),NRF52)
+
+
+ifeq ($(SDK_TYPE),0.x.x)
+ifeq  ($(USE_SOFT_DEVICE),no)
+SOFTDEVICE = 
+LINKER_SCRIPT ?= $(LINKER_SCRIPT_TOP_DIR)/nrf52_$(LINKER_FILE_SUFFIX).ld
+else
+SOFTDEVICE = $(USE_SOFT_DEVICE)
+LINKER_SCRIPT ?= $(LINKER_SCRIPT_TOP_DIR)/nrf52_$(LINKER_FILE_SUFFIX).ld  # FIXME - filename to be updated
+endif
+
+endif
+
+endif  # NRF52
+
 
 
 LINKER_SCRIPT_TOP_DIR ?= $(SDK_PATH)/components/toolchain/gcc
