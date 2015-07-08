@@ -6,7 +6,9 @@ SRCS_AS :=
 
 INC_PATHS  := -I.
 
-DEVICE = NRF52
+DEVICE = NRF51
+#DEVICE = NRF52
+
 #CHIP=nRF51822-QFAA
 #CHIP=nRF51822-CEAA
 #CHIP=nRF51822-QFAB
@@ -26,16 +28,16 @@ CHIP=nRF52832-QFAA
 
 # From nRF51_Series_Compatibility_Matrix_v1.2.pdf :
 #  The nRF51-DK and nRF51-Dongle is using the nRF51422-QFAC variant of the chip
-#BOARD =  nRF51_DK # Where is the nRF51 board file ?
-BOARD =  nRF52_DK # Where is the nRF51 board file ?
+BOARD =  nRF51_DK # Where is the nRF51 board file ?
+#BOARD =  nRF52_DK 
 
 SDK_TYPE=8.x.x
 SDK_VERSION=nRF51_SDK_8.1.0_b6ed55f
 SDK_URL=http://developer.nordicsemi.com/nRF51_SDK/nRF51_SDK_v8.x.x
 
-SDK_TYPE=0.x.x
-SDK_VERSION=nRF52_SDK_0.9.0_0c82e3e
-SDK_URL=http://developer.nordicsemi.com/nRF52_SDK/nRF52_SDK_v0.x.x/
+#SDK_TYPE=0.x.x
+#SDK_VERSION=nRF52_SDK_0.9.0_0c82e3e
+#SDK_URL=http://developer.nordicsemi.com/nRF52_SDK/nRF52_SDK_v0.x.x/
 
 #SDK_TYPE=7.x.x
 #SDK_VERSION=nRF51_SDK_7.2.0_cf547b5
