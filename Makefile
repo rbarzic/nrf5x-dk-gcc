@@ -22,26 +22,27 @@ DEVICE = NRF51
 #CHIP=nRF51422-QFAB
 #CHIP=nRF51422-CDAB
 ##  nRF51-DK :   CHIP=nRF51422-QFAC
-#CHIP=nRF51422-CFA
+CHIP=nRF51422-QFAC
 
-CHIP=nRF52832-QFAA
+
+#CHIP=nRF52832-QFAA
 
 # From nRF51_Series_Compatibility_Matrix_v1.2.pdf :
 #  The nRF51-DK and nRF51-Dongle is using the nRF51422-QFAC variant of the chip
 BOARD =  nRF51_DK # Where is the nRF51 board file ?
 #BOARD =  nRF52_DK 
 
-SDK_TYPE=8.x.x
-SDK_VERSION=nRF51_SDK_8.1.0_b6ed55f
-SDK_URL=http://developer.nordicsemi.com/nRF51_SDK/nRF51_SDK_v8.x.x
+#SDK_TYPE=8.x.x
+#SDK_VERSION=nRF51_SDK_8.1.0_b6ed55f
+#SDK_URL=http://developer.nordicsemi.com/nRF51_SDK/nRF51_SDK_v8.x.x
 
 #SDK_TYPE=0.x.x
 #SDK_VERSION=nRF52_SDK_0.9.0_0c82e3e
 #SDK_URL=http://developer.nordicsemi.com/nRF52_SDK/nRF52_SDK_v0.x.x/
 
-#SDK_TYPE=7.x.x
-#SDK_VERSION=nRF51_SDK_7.2.0_cf547b5
-#SDK_URL=http://developer.nordicsemi.com/nRF51_SDK/nRF51_SDK_v7.x.x
+SDK_TYPE=7.x.x
+SDK_VERSION=nRF51_SDK_7.2.0_cf547b5
+SDK_URL=http://developer.nordicsemi.com/nRF51_SDK/nRF51_SDK_v7.x.x
 
 
 SDK_INSTALL_DIR=../../nordic
@@ -69,7 +70,7 @@ endif
 # Don't touch lines below
 include misc/nRF51_Devices.mk
 include misc/nRF52_Devices.mk
-include misc/SDK_Makefile.mk
+-include misc/SDK_Makefile.mk
 include misc/Main.mk
 include misc/nrftools_jlink.mk
 include misc/check.mk

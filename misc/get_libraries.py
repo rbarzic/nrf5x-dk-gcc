@@ -6,7 +6,8 @@ import pprint as pp
 
 allowed_top_dirs = ['components']
 # Special files that should be handled specially
-ignored_files = ['gcc_startup_nrf52.s','gcc_startup_nrf51.s']
+#ignored_files = ['gcc_startup_nrf52.s','gcc_startup_nrf51.s']
+ignored_files = []
 
 
 def get_args():
