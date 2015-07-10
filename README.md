@@ -9,6 +9,6 @@ https://github.com/hlnd/nrf51-pure-gcc-setup
 ## Requirements
 
 - ARM GCC toolchain (arm-none-eabi-*)
-- [nrtool](https://github.com/pauloborges/nrftool)
+- [nrftool](https://github.com/pauloborges/nrftool)
 - [Segger's JLink software](http://www.segger.com/jlink-software.html)
 
