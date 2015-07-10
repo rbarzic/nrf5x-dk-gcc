@@ -16,14 +16,19 @@ OBJDUMP  		:= "$(GNU_PREFIX)-objdump"
 OBJCOPY  		:= "$(GNU_PREFIX)-objcopy"
 SIZE    		:= "$(GNU_PREFIX)-size"
 
+ifeq ($(DEVICE),NRF51)
 C_SOURCE_FILES += $(SDK_PATH)/components/toolchain/system_nrf51.c
-
+endif
+ifeq ($(DEVICE),NRF52)
+C_SOURCE_FILES += $(SDK_PATH)/components/toolchain/system_nrf52.c
+endif
 
 INC_PATHS += -I$(SDK_PATH)/components/toolchain/gcc
 INC_PATHS += -I$(SDK_PATH)/components/toolchain
 INC_PATHS += -I$(SDK_PATH)/components/drivers_nrf/hal # SDK 7.x.x
 INC_PATHS += -I$(SDK_PATH)/components/device         # SDK 8.x.x
 INC_PATHS += -I$(SDK_PATH)/bsp
+INC_PATHS += -I$(SDK_PATH)/examples/bsp
 
 
 ifeq ($(DEVICE),NRF51)
@@ -31,7 +36,7 @@ CPUFLAGS += -mthumb -mcpu=cortex-m0 -march=armv6-m
 endif
 
 ifeq ($(DEVICE),NRF52)
-CPUFLAGS += -mthumb -mcpu=cortex-m4 
+CPUFLAGS += -mthumb -mcpu=cortex-m4
 endif
 
 
@@ -105,8 +110,6 @@ test:
 
 all: $(OBJS) $(OBJS_AS) $(HEX)
 
-clean:
-	rm -Rf $(OBJS) $(OBJS_AS)
 
 $(HEX): $(OBJS) $(OBJS_AS)
 	$(LD) $(LDFLAGS)  $(OBJS) $(OBJS_AS) -o $(ELF)
@@ -147,11 +150,16 @@ install_sdk:
 # ./get_libraries.py --dir=../../../nordic/nRF51_SDK_7.2.0_cf547b5  --pattern='*.[c|h|s]' > SDK_Makefile.mk
 
 get_library:
-	./misc/get_libraries.py --dir=$(SDK_INSTALL_DIR)/$(SDK_VERSION)  --pattern='*.[c|h|s]' > ./misc/SDK_Makefile.mk
+	./misc/get_libraries.py --family=$(DEVICE) --dir=$(SDK_INSTALL_DIR)/$(SDK_VERSION)  --pattern='*.[c|h|s]' > ./misc/SDK_Makefile.mk
 
 
 
 echo-cflags:
 	@echo \"$(CFLAGS)\"
+
+clean:
+	rm -Rf $(OBJS) $(OBJS_AS) $(HEX) $(BIN) $(ELF)
+
+
 
 .PHONY: all clean

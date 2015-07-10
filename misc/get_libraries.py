@@ -6,7 +6,8 @@ import pprint as pp
 
 allowed_top_dirs = ['components']
 # Special files that should be handled specially
-#ignored_files = ['gcc_startup_nrf52.s','gcc_startup_nrf51.s']
+ignored_files_nrf51 = ['gcc_startup_nrf52.s']
+ignored_files_nrf52 = ['gcc_startup_nrf51.s']
 ignored_files = []
 
 
@@ -24,6 +25,9 @@ Put description of application here
     parser.add_argument('--pattern', action='store', dest='pattern',
                         help='pattern (Unix style pattern matching)  to be matched')
 
+    parser.add_argument('--family', action='store', dest='family',
+                        help='nRF family : nrf51 or nrf52 (NRF51/NRF52)')
+
     parser.add_argument('--version', action='version', version='%(prog)s 0.1')
 
     return parser.parse_args()
@@ -39,7 +43,7 @@ def find_files(dir, pattern):
 
 
 
-if __name__ == '__main__':
+if __name__ == '__main__':    
     args = get_args()
     modules = {}
     includes = {}
@@ -48,6 +52,13 @@ if __name__ == '__main__':
     sdk_top = args.dir.split('/')[-1]
     top_length = len(args.dir.split('/'))
     # print "SDK name/top ", sdk_top
+    if args.family.lower() == 'nrf51':
+        ignored_files = ignored_files_nrf51
+    if args.family.lower() == 'nrf52':
+        ignored_files = ignored_files_nrf52
+        
+    
+        
     for f in find_files(args.dir, args.pattern):
         #print "Full path  ", f
         relative_path = f.replace(args.dir, '$(SDK_INSTALL_DIR)/$(SDK_VERSION)')
