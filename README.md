@@ -42,8 +42,11 @@ Program the flash : make program
 
 It looks like the linker file for the xxaa device is incorrect :
 the line 
+
 RAM (rwx) :  ORIGIN = 0x20000000, LENGTH = 0x10000
+
 should be
+
 RAM (rwx) :  ORIGIN = 0x20000000, LENGTH = 0x10000
 
 (the linker file for the blinky example in the SDK has this corrected)
