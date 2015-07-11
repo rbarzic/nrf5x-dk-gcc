@@ -30,21 +30,21 @@ INC_PATHS += -I$(SDK_PATH)/components/device         # SDK 8.x.x
 INC_PATHS += -I$(SDK_PATH)/bsp
 INC_PATHS += -I$(SDK_PATH)/examples/bsp
 
-
+# FIXME : nRF51 options are incomplete
 ifeq ($(DEVICE),NRF51)
 CPUFLAGS += -mthumb -mcpu=cortex-m0 -march=armv6-m
 endif
 
 ifeq ($(DEVICE),NRF52)
-CPUFLAGS += -mthumb -mcpu=cortex-m4
+CPUFLAGS +=  -mcpu=cortex-m4 -mthumb -mabi=aapcs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -ffunction-sections -fdata-sections -fno-strict-aliasing -fno-builtin --short-enums
 endif
 
 
 
-CFLAGS += -std=gnu99 -c $(CPUFLAGS) -Wall -D$(DEVICE) -D$(BOARD)   -MD
+CFLAGS += -std=gnu99 -c $(CPUFLAGS) -Wall -D$(DEVICE) -D$(BOARD)   -MD -O3
 CFLAGS += $(INC_PATHS)
 
-
+CFLAGS += -DCONFIG_GPIO_AS_PINRESET
 
 SRCS = $(C_SOURCE_FILES)
 OBJS = $(C_SOURCE_FILES:.c=.o)
@@ -123,10 +123,10 @@ print_flash_address:
 
 %.o: %.c
 
-	$(CC) $(LDFLAGS) $(CFLAGS) $< -o $@
+	$(CC)  $(CFLAGS) $< -o $@
 
 %.os: %.s
-	$(CC) $(LDFLAGS) $(CFLAGS) $< -o $@
+	$(CC) -x assembler-with-cpp$  $(CFLAGS) $< -o $@
 
 
 
