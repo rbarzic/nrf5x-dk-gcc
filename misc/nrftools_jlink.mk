@@ -8,12 +8,8 @@ JLINKEXE=JLinkExe
 
 JLINKEXE_PATH=$(shell which $(JLINKEXE))
 
-erase-all: 
-	$(PROGRAMMER) --jlinkexe $(JLINKEXE_PATH) erase
-	
+erase-all:
+	$(PROGRAMMER) --device=$(DEVICE) --jlinkexe $(JLINKEXE_PATH) erase
 
-program: 
-	$(PROGRAMMER) --jlinkexe $(JLINKEXE_PATH) flash $(PROJECT_NAME).bin $(FLASH_START_ADDRESS)
-
-	
-
+program:
+	$(PROGRAMMER) --device=$(DEVICE) --jlinkexe $(JLINKEXE_PATH) flash $(PROJECT_NAME).bin $(FLASH_START_ADDRESS)
