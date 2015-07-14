@@ -47,7 +47,7 @@ RAM (rwx) :  ORIGIN = 0x20000000, LENGTH = 0x10000
 
 should be
 
-RAM (rwx) :  ORIGIN = 0x20000000, LENGTH = 0x10000
+RAM (rwx) :  ORIGIN = 0x20000000, LENGTH = 0x8000
 
 (the linker file for the blinky example in the SDK has this corrected)
 
