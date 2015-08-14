@@ -150,7 +150,7 @@ install_sdk:
 # ./get_libraries.py --dir=../../../nordic/nRF51_SDK_7.2.0_cf547b5  --pattern='*.[c|h|s]' > SDK_Makefile.mk
 
 get_library:
-	./misc/get_libraries.py --family=$(DEVICE) --dir=$(SDK_INSTALL_DIR)/$(SDK_VERSION)  --pattern='*.[c|h|s]' > ./misc/SDK_Makefile.mk
+	$(MISC)/get_libraries.py --family=$(DEVICE) --dir=$(SDK_INSTALL_DIR)/$(SDK_VERSION)  --pattern='*.[c|h|s]' > $(MISC)/SDK_Makefile.mk
 
 
 
