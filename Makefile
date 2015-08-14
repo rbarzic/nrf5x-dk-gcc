@@ -8,7 +8,7 @@ INC_PATHS  := -I.
 
 #DEVICE = NRF51
 DEVICE = NRF52
-
+MISC=misc
 
 #BOARD=BOARD_PCA10028
 
@@ -31,10 +31,14 @@ BOARD=BOARD_PCA10036
 
 CHIP=nRF52832-QFAA
 
+# From nRF51_Series_Compatibility_Matrix_v1.2.pdf :
+#  The nRF51-DK and nRF51-Dongle is using the nRF51422-QFAC variant of the chip
+#BOARD =  nRF51_DK # Where is the nRF51 board file ?
+#BOARD =  nRF52_DK # Where is the nRF51 board file ?
 
-#SDK_TYPE=8.x.x
-#SDK_VERSION=nRF51_SDK_8.1.0_b6ed55f
-#SDK_URL=http://developer.nordicsemi.com/nRF51_SDK/nRF51_SDK_v8.x.x
+SDK_TYPE=8.x.x
+SDK_VERSION=nRF51_SDK_8.1.0_b6ed55f
+SDK_URL=http://developer.nordicsemi.com/nRF51_SDK/nRF51_SDK_v8.x.x
 
 SDK_TYPE=0.x.x
 SDK_VERSION=nRF52_SDK_0.9.0_0c82e3e
@@ -68,9 +72,9 @@ endif
 
 
 # Don't touch lines below
-include misc/nRF51_Devices.mk
-include misc/nRF52_Devices.mk
--include misc/SDK_Makefile.mk
-include misc/Main.mk
-include misc/nrftools_jlink.mk
-include misc/check.mk
+include $(MISC)/nRF51_Devices.mk
+include $(MISC)/nRF52_Devices.mk
+-include $(MISC)/SDK_Makefile.mk
+include $(MISC)/Main.mk
+include $(MISC)/nrftools_jlink.mk
+include $(MISC)/check.mk
