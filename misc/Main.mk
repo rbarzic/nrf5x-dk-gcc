@@ -157,6 +157,9 @@ get_library:
 echo-cflags:
 	@echo \"$(CFLAGS)\"
 
+create_emacs_dir_locals:
+	python $(MISC)/flags2el.py --cflags=\\"$(CFLAGS)\\" --elisp=.dir-locals.el
+
 clean:
 	rm -Rf $(OBJS) $(OBJS_AS) $(HEX) $(BIN) $(ELF)
 
