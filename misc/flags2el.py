@@ -9,6 +9,9 @@ dir_local = """
 
 """
 
+defs = ["-D__STATIC_INLINE= "]
+
+
 def get_args():
     """
     Convert CFLAGS (gcc/clang options) to an emacs-lisp .dir-locals.el file
@@ -35,14 +38,16 @@ if __name__ == '__main__':
 
     #print ">>" + cflags + "<<"
     inc_dirs =     re.findall(r"-I\s*\S+",cflags)
+    defs += (re.findall(r"-D\s*\S+",cflags))
     # remove -I
     inc_dirs_noinc = [x.replace('-I','').strip()  for x in inc_dirs ]
-    pp.pprint(inc_dirs)
+    pp.pprint(defs)
     
     inc_dirs_abs = [os.path.abspath(x) for x in inc_dirs_noinc ]
     inc_dirs_quoted = ["\"-I" + x + "\"" for x in inc_dirs_abs ]
-    
-    txt = dir_local.format(inc_dirs= '\n'.join(inc_dirs_quoted))
+    defs_quoted = ["\"" + x + "\"" for x in defs ]
+     
+    txt = dir_local.format(inc_dirs= '\n'.join(inc_dirs_quoted + defs_quoted))
     print(txt)
     with open(args.elisp,'w') as fh:
         fh.write(txt)

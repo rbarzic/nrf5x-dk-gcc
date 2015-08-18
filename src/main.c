@@ -4,6 +4,7 @@
 #include <stdint.h>
 #include "nrf_delay.h"
 #include "nrf_gpio.h"
+#include "nrf_rtc.h"
 #include "nrf_drv_gpiote.h"
 #include "boards.h"
 
@@ -24,22 +25,6 @@ int main(void)
         {
             LEDS_INVERT(1 << leds_list[i]);
             nrf_delay_ms(500);
-            
         }
     }
 }
-
-
-// int main(void){
-//     nrf_gpio_range_cfg_output(21,22);
-//     while(1){
-//         nrf_gpio_pin_write(21,1);
-//         nrf_gpio_pin_write(22,0);
-// 
-//         nrf_delay_ms(500);
-//         
-//         nrf_gpio_pin_write(21, 0);
-//         nrf_gpio_pin_write(22, 1);
-//         nrf_delay_ms(500);
-//     }
-// }
