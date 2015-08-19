@@ -160,8 +160,12 @@ echo-cflags:
 create_emacs_dir_locals:
 	python $(MISC)/flags2el.py --cflags=\\"$(CFLAGS)\\" --elisp=.dir-locals.el
 
-create_tags:
+create_ctags:
 	find ./src $(SDK_INSTALL_DIR)/$(SDK_VERSION) -name "*.[c|h]" | xargs ctags -e -f TAGS
+
+create_etags:
+	find ./src $(SDK_INSTALL_DIR)/$(SDK_VERSION) -name "*.[c|h]" | xargs etags
+
 
 clean:
 	rm -Rf $(OBJS) $(OBJS_AS) $(HEX) $(BIN) $(ELF)

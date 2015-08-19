@@ -66,7 +66,6 @@ ifeq ($(DEVICE),NRF52)
 SDK_DRIVERS_NRF_DELAY=yes
 SDK_LIBRARIES_UTIL=yes
 
-SDK_DRIVERS_NRF_GPIOTE=yes
 # Fixme below - only if no Soft Device used
 SDK_DRIVERS_NRF_NRF_SOC_NOSD=yes
 endif

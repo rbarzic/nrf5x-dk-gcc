@@ -1,5 +1,5 @@
 # nrf5x-dk-gcc
-A example of nRF51-DK/nRF52-DK  application using gcc on Linux
+A example of nRF51-DK/nRF52-DK  application using gcc on Linux, with extra support for development using emacs
 
 Strongly inspired by :
 http://www.funwithelectronics.com/?id=168
@@ -10,7 +10,9 @@ Notes :
    - Soft Device support not tested yet
    - this is work in progress - feedback welcome !
 
-
+   You can include this project as a git submodule in your own nRF5x project - No need to clone it !
+   See https://github.com/rbarzic/nrf52-example-uart.git as an example
+   
 ## Requirements
 
 - ARM GCC toolchain (arm-none-eabi-*)
@@ -36,6 +38,20 @@ Compile the project : make all
 Erase the flash : make erase-all
 
 Program the flash : make program
+
+## Emacs specific support
+
+The makefile can generate tag files and a .dir-locals.el file for company-clang (code completion using clang) and c-eldoc (Function prototype displayed in the mode-line).
+
+Creating the tag file using etags: make create_etags
+
+Creating the tag file using ctags (Exuberant Ctags) : make create_ctags 
+
+Creating the .dir-locals.el : make create_emacs_dir_locals
+
+
+On-the fly error checking using Flymake is supported using the check-syntax target in the Makefile
+(Note that FlyCheck mode is not supported yet so you have have to disable it before using Flymake)
 
 
 ## nRF52 SDK fix

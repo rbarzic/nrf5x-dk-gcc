@@ -4,8 +4,6 @@
 #include <stdint.h>
 #include "nrf_delay.h"
 #include "nrf_gpio.h"
-#include "nrf_rtc.h"
-#include "nrf_drv_gpiote.h"
 #include "boards.h"
 
 const uint8_t leds_list[LEDS_NUMBER] = LEDS_LIST;
