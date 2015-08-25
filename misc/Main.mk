@@ -39,9 +39,18 @@ ifeq ($(DEVICE),NRF52)
 CPUFLAGS +=  -mcpu=cortex-m4 -mthumb -mabi=aapcs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -ffunction-sections -fdata-sections -fno-strict-aliasing -fno-builtin --short-enums
 endif
 
+OPT_DEBUG ?= -O -ggdb
+OPT_NO_DEBUG ?= -O3
+
+ifeq ($(DEBUG),yes)
+CFLAGS += $(OPT_DEBUG) 
+else
+CFLAGS += $(OPT_NO_DEBUG) 
+endif
 
 
-CFLAGS += -std=gnu99 -c $(CPUFLAGS) -Wall -D$(DEVICE) -D$(BOARD)   -MD -O3
+
+CFLAGS += -std=gnu99 -c $(CPUFLAGS) -Wall -D$(DEVICE) -D$(BOARD)   -MD 
 CFLAGS += $(INC_PATHS)
 
 CFLAGS += -DCONFIG_GPIO_AS_PINRESET
