@@ -2,7 +2,7 @@
 # it avoid to deal directly with scripts as
 # done in nrf51-pure-gcc-setup
 
-GDB_PORT ?= 2345
+
 
 PROGRAMMER ?= nrftool
 

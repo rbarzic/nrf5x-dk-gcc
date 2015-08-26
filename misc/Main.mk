@@ -1,6 +1,11 @@
 # Common setup
-
+CURRENT_DIR = $(shell pwd)
 SDK_PATH := $(SDK_INSTALL_DIR)/$(SDK_VERSION)
+
+
+# GDB server port
+
+GDB_PORT ?= 2345
 
 # Toolchain commands
 # Pathes should not be handled in Makefile
@@ -167,7 +172,7 @@ echo-cflags:
 	@echo \"$(CFLAGS)\"
 
 create_emacs_dir_locals:
-	python $(MISC)/flags2el.py --cflags=\\"$(CFLAGS)\\" --elisp=.dir-locals.el
+	python $(MISC)/flags2el.py --cflags=\\"$(CFLAGS)\\" --elisp=.dir-locals.el --elf=$(CURRENT_DIR)/$(ELF) --gdb_port=$(GDB_PORT)
 
 create_ctags:
 	find ./src $(SDK_INSTALL_DIR)/$(SDK_VERSION) -name "*.[c|h]" | xargs ctags -e -f TAGS

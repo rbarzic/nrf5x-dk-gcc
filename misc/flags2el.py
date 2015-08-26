@@ -4,10 +4,14 @@ import pprint as pp
 import re
 import os
 
+
+gdb_string="""arm-none-eabi-gdb -i=mi  -iex \\\"target remote :{gdb_port}\\\"  -ex \\\"monitor reset\\\" -ex \\\"b main\\\" -ex \\\"continue\\\" -ex \\\"delete 1\\\" {elf}"""
+
 dir_local = """
 ((nil . (
    (company-clang-arguments . ({company-clang-arguments}))
    (c-eldoc-includes        . "{c-eldoc-include}")
+   (gud-gdb-command-name    . "{gud-gdb-command-name}")
 
 
 )))
@@ -28,6 +32,12 @@ Put description of application here
                    """)
     parser.add_argument('--cflags', action='store', dest='cflags',
                         help='gcc/clang option line (quoted)')
+    parser.add_argument('--elf', action='store', dest='elf',
+                        help='Project final elf file, full path')
+
+    parser.add_argument('--gdb_port', action='store', dest='gdb_port',
+                        help='Port used by gdb server')
+    
     parser.add_argument('--elisp', action='store', dest='elisp',
                         help='elisp file to be generated')
 
@@ -56,6 +66,8 @@ if __name__ == '__main__':
     fmt = dict()
     fmt['company-clang-arguments'] = '\n'.join(inc_dirs_quoted+defs_quoted)
     fmt['c-eldoc-include'] = ' '.join(inc_dirs_unquoted + defs)
+    gdb_cmd = gdb_string.format(gdb_port=args.gdb_port, elf=args.elf)
+    fmt['gud-gdb-command-name'] = gdb_cmd
     txt = dir_local.format(**fmt)
     print(txt)
     with open(args.elisp, 'w') as fh:
