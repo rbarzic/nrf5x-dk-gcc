@@ -29,6 +29,7 @@ ifeq ($(PROGRAMMER),nrftool)
 endif
 ifeq ($(PROGRAMMER),nrfjprog)
 	$(PROGRAMMER) --family $(DEVICE) --program $(PROJECT_NAME).hex
+	$(PROGRAMMER) --reset
 endif
 
 jlinkgdbsever:
